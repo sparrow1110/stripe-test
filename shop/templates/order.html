@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Заказ #{{ order.id }}</title>
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <h1>Заказ #{{ order.id }}</h1>
+    <ul>
+    {% for oi in order.orderitem_set.all %}
+        <li>{{ oi.item.name }} × {{ oi.quantity }} = {{ oi.item.get_price_in_dollars }} × {{ oi.quantity }}</li>
+    {% endfor %}
+    </ul>
+    <h3>Общая сумма: ${{ order.get_total_price|floatformat:2 }}</h3>
+    <button id="buy-button">Оплатить заказ</button>
+
+    <script>
+        const stripe = Stripe('{{ stripe_public_key }}');
+        document.getElementById('buy-button').addEventListener('click', () => {
+            fetch('/buy-order/{{ order.id }}/')
+                .then(r => r.json())
+                .then(session => stripe.redirectToCheckout({ sessionId: session.id }));
+        });
+    </script>
+</body>
+</html>
