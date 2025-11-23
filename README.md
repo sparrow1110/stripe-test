@@ -1,7 +1,5 @@
 # Stripe + Django тестовое
 
-## Онлайн-версия
-https://stripe-test-tkh0.onrender.com
 
 ## Все доступные URL
 
