@@ -27,4 +27,4 @@ docker-compose up --build
 После запуска проект доступен по адресу:  
 http://localhost:8000
 
-Админка: http://localhost:8000/admin (admin / test12345)
+Админка: http://localhost:8000/admin (admin / root - логин / пароль по умолчанию)
